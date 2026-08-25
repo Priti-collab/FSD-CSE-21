@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shop</title>
+    <style>
+      .menu-box {
+        width: 300px;
+        height: 300px;
+        border: 2px solid #333;
+        background-color: cadetblue;
+        border-radius: 10px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      .menu-box h2 {
+        margin-top: 0;
+      }
+      .menu-box ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+      }
+      .menu-box li {
+        margin: 8px 0;
+      }
+      .menu-box button {
+        margin-top: 15px;
+        padding: 8px 20px;
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+
+<div class="menu-box">
+  <h2>ONLINE SHOP</h2>
+  <ul>
+    <li>TEA : ₹100</li>
+    <li>COFFEE : ₹500</li>
+    <li>AATA : ₹600</li>
+  </ul>
+  <button onclick="ad()">BUY NOW</button>
+</div>
+
+<script>
+  // product name -> price and image
+  let products = {
+    TEA: { price: 100, img: "https://cdn-icons-png.flaticon.com/512/2935/2935307.png" },
+    COFFEE: { price: 500, img: "https://cdn-icons-png.flaticon.com/512/751/751621.png" },
+    AATA: { price: 600, img: "https://cdn-icons-png.flaticon.com/512/1996/1996057.png" }
+  };
+
+  function ad() {
+    let count = parseInt(prompt("How many different products do you want to buy?"));
+
+    if (!count || count <= 0) {
+      alert("Please enter a valid number!");
+      return;
+    }
+
+    let total = 0;
+    let output = "<h2>Order Confirmed</h2>";
+
+    for (let i = 0; i < count; i++) {
+      let a = prompt("Enter Product name (" + (i + 1) + " of " + count + "):");
+      let b = prompt("Enter Quantity for " + a + ":");
+
+      let name = a.toUpperCase();
+      let qty = parseInt(b);
+
+      if (!products[name] || !qty || qty <= 0) {
+        alert(a + " is invalid, skipping it.");
+        continue; // skip this round, go to next product
+      }
+
+      let price = products[name].price;
+      let img = products[name].img;
+      let itemTotal = price * qty;
+      total += itemTotal;
+
+      output += "<img src='" + img + "' width='100'><br>";
+      output += "Product: " + name + "<br>";
+      output += "Quantity: " + qty + "<br>";
+      output += "Item Total: ₹" + itemTotal + "<br><hr>";
+    }
+
+    output += "<h3>Grand Total: ₹" + total + "</h3>";
+    document.write(output);
+  }
+</script>
+
+</body>
+</html>
